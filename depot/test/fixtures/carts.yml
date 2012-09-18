@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  quantity: 1
+  description: MyString
+  product_id: 1
+  buyer_id: 1
+  seller_id: 1
+  price: 9.99
+  total_price: 9.99
+  date: 2012-09-18
+  time: 2012-09-18 10:43:38
+
+two:
+  quantity: 1
+  description: MyString
+  product_id: 1
+  buyer_id: 1
+  seller_id: 1
+  price: 9.99
+  total_price: 9.99
+  date: 2012-09-18
+  time: 2012-09-18 10:43:38

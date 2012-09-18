@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  order_number: 1
+  seller_id: 1
+  buyer_id: 1
+  reciept_no: MyString
+  quantity: 1
+
+two:
+  order_number: 1
+  seller_id: 1
+  buyer_id: 1
+  reciept_no: MyString
+  quantity: 1

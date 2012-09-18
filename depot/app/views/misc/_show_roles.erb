@@ -1,0 +1,8 @@
+<%@roles=Role.all%>
+<%unless @roles.blank?%>
+<%@roles.each do |r| %>
+<div><p style="width:20%;float:left;"><%=r.name%></p>
+  <p style="width:10%;float:left;"><%=link_to "Edit",:action=>"edit",:id=>r.id%></p>
+  <p style="width:70%;float:left;"><%=link_to "Delete"%></p></div>
+<%end%>
+<%end%>

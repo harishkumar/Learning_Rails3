@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Depot</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body style="border:1px solid #444;">
+  <div style="background:#333;height:40px;">
+    <%if !session[:user_id].nil?%>
+<%=link_to "logout",:controller=>"misc",:action=>"logout"%>
+   <%end%>
+  </div>
+  <div style="min-height:300px;"><%= yield %></div>
+  <div style="background:#333;height:10px;"></div>
+</body>
+</html>
