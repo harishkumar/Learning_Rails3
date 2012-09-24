@@ -2,18 +2,22 @@
 <%=form_for :cart do |h|%>
  <tr><td>Quantity</td><td>Name</td><td>Description</td><td>Price</td><td>Total</td></tr>
 
-   <tr><td><%=h.select :quantity,(1..10),{:prompt=>"Quantity"}%></td><td><%=@product.name%></td><td><%=@product.description%></td><td id="price"><%=@product.price%></td><td id="total"></td></tr>
+   <tr><td>
+      <%= select "cart","quantity", [1,2,3,4,5],{:prompt=>"Quantity"},
+        { :onchange => "$.ajax({url: '../cart/display_total',
+        data: 'count=' + value + '&price=' + #{@product.price}})"}%>
+
+          
+   </td>
+     <td><%=@product.name%></td><td><%=@product.description%></td><td id="price"><%=@product.price%></td><td id="total"></td></tr>
 </table>
 
 <%=h.submit%>
 <%end%>
 
 <script type="text/javascript">
-  var x=document.getElementbyId("price").value;
-  alert(x);
-$(document).ready(function(){
-  $("#cart_quantity").change(function(){
-    $("#total").html(x);
-  });
-});
+ 
+
+
 </script>
+
