@@ -3,7 +3,7 @@
   <div id="content">
     <%@products.each do |p|%>
      <div id="product_block"><div id="photo"></div>
-       <div id="desc"><h2><%=link_to p.name,:controller=>"cart",:action=>"my_cart_page",:id=>p.id%></h2><p> <%=p.description%></p><h4> price: <%=p.price%>$</h4></div>
+       <div id="desc"><h2><%=link_to p.name,:url=>{:controller=>"cart",:action=>"my_cart_page",:id=>p.id},:remote=>true%></h2><p> <%=p.description%></p><h4> price: <%=p.price%>$</h4></div>
      </div>
     <%end%>
 
@@ -34,3 +34,5 @@
     margin-bottom: 5px;
     width: 100%;}
 </style>
+
+

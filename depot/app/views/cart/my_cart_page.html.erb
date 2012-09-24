@@ -1,3 +1,4 @@
+<%@product=Product.find(params[:id])%>
 <table cellpadding="2" border="1" cellspacing="1">
 <%=form_for :cart do |h|%>
  <tr><td>Quantity</td><td>Name</td><td>Description</td><td>Price</td><td>Total</td></tr>
@@ -6,13 +7,18 @@
       <%= select "cart","quantity", [1,2,3,4,5],{:prompt=>"Quantity"},
         { :onchange => "$.ajax({url: '../cart/display_total',
         data: 'count=' + value + '&price=' + #{@product.price}})"}%>
+      <%=h.hidden_field :description,:value=>@product.description%>
+       <%=h.hidden_field :product_id,:value=>@product.id%>
+       <%=h.hidden_field :buyer_id,:value=>session[:user_id]%>
+       <%=h.hidden_field :seller_id,:value=>@product.user_id%>
+       <%=h.hidden_field :date,:value=>Date.today%>
+       <%=h.hidden_field :time,:value=>Time.now%>
 
-          
    </td>
      <td><%=@product.name%></td><td><%=@product.description%></td><td id="price"><%=@product.price%></td><td id="total"></td></tr>
 </table>
-
-<%=h.submit%>
+<%= h.submit 'Save and continue shopping' %>
+<%= h.submit 'Save and Pay' %>
 <%end%>
 
 <script type="text/javascript">

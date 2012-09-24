@@ -1,6 +1,7 @@
 Depot::Application.routes.draw do
   match "cart/my_cart_page"=>"cart#my_cart_page"
   match "cart/display_total"=>"cart#display_total"
+  match "buyer/add_to_cart"=>"buyer#add_to_cart"
   get "buyer/catalog"
 
   get "misc/new"
