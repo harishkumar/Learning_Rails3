@@ -1,0 +1,9 @@
+<%@cart=list_products(session[:user_id])%>
+<%unless @cart.blank?%>
+<%@cart.each do |c|%>
+<div style="background:#B7CBE9;margin-top:2px;"><%=Product.find(c.product_id).name%></div>
+<%end%>
+<%end%>
+<br/>
+<%=link_to "View My Cart",:controller=>"cart",:action=>"my_cart_page"%>
+

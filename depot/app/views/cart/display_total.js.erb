@@ -1,1 +1,2 @@
-$('#total').html("<%= escape_javascript(render("total_price")) %>");
+$('#total<%=params[:cart]%>').html('<%=escape_javascript(render :partial=>'total_price').html_safe%>');
+

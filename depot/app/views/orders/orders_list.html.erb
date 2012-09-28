@@ -1,0 +1,25 @@
+<div id="order_page">
+<div id="list_orders">
+  <%unless @uniq_orders.blank?%>
+ <%@uniq_orders.each do |order|%>
+  <div><%=link_to order.order_number,{:controller=>"orders",:action=>"approve_orders",:order_number=>order.order_number,:date=>order.shopping_date},:remote=>true%></div>
+ <%end%>
+  <%else%>
+    No Orders
+  <%end%>
+</div>
+<div id="order_products"><%unless @uniq_orders.blank?%>Select Order Numbers<%end%><br/>
+</div>
+</div>
+
+<style>
+  #order_page{height:500px;width:1024px;margin:0px auto;margin-top:30px;border:1px solid #bfbfbf;}
+  #list_orders{width:503px;overflow:auto;float:left;height:100%;}
+  #list_orders div{background:#B7CBE9;font-size:14px;text-align:center;
+      height:20px;margin-bottom:2px;}
+  #order_products{width:520px;background:#C9DDE0;float:left;height:100%;overflow:auto;font-size:12px;}
+  #order_products table{margin:0px auto;}
+  #order_products table td{font-size:12px;background:#B7CBE9;}
+</style>
+
+<%#=link_to p.name,{:controller=>"buyer",:action=>"add_to_cart",:id=>p.id},:remote=>true%>

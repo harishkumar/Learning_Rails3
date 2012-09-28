@@ -1,0 +1,17 @@
+<h1>Create Files</h1>
+<%=form_for :my_file do |f|%>
+File name <%=f.text_field :file_name%><br/>
+Content <%=f.text_area :content,:rows=>5%><br/>
+<%=f.submit "create file"%>
+<%end%>
+<br/>
+<table cellspacing="3">
+  <tr><th>Name</th></tr>
+<%@files.each do |f|%>
+  <tr><td><%=f.name%></td>
+    <td><%=link_to "Open",:action=>"show_file",:id=>f.id%></td>
+    <td><%=link_to "Edit",:action=>"edit_file",:id=>f.id%></td>
+    <td><%=link_to "Delete",:action=>"delete_file",:id=>f.id%></td>
+  </tr>
+<%end%>
+</table>

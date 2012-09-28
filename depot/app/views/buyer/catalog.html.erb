@@ -1,16 +1,21 @@
-<div id="page"><%unless @mess.nil?%><div><%=@mess%></div><%end%>
-  <div id="left_menu"></div>
+<div id="page">
+  <div id="left_menu"><%unless params[:mess].nil?%><div id="flash"><%=params[:mess]%></div><%end%></div>
   <div id="content">
     <%@products.each do |p|%>
      <div id="product_block"><div id="photo"></div>
-       <div id="desc"><h2><%=link_to p.name,:url=>{:controller=>"cart",:action=>"my_cart_page",:id=>p.id},:remote=>true%></h2><p> <%=p.description%></p><h4> price: <%=p.price%>$</h4></div>
+       <div id="desc">
+         <h2><%=link_to p.name,{:controller=>"buyer",:action=>"add_to_cart",:id=>p.id},:remote=>true%></h2><p> <%=p.description%></p><h4> price: <%=p.price%>$</h4>
+       </div>
      </div>
     <%end%>
 
   </div>
+ <div id ="cart_block"><%=render :partial=>"add_to_cart_list"%></div>
 </div>
+
+
 <style>
-  #page{width:1024px;height:700px;}
+  #page{height:700px;}
   #photo{background: none repeat scroll 0 0 beige;
     border: 1px solid #B7CBE9;
     float: left;
@@ -26,13 +31,14 @@
   #desc h2{}
   #desc p{}
   #desc h4{font-size:12px;}
-  #left_menu{width:200px;height:700px;border:1px solid;float:left;}
+  #left_menu{width:250px;height:700px;border:1px solid #B7CBE9;float:left;}
 
-  #content{height:700px;width:800px;border:1px solid;float:left;}
+  #content{height:700px;width:823px;border:1px solid groove;float:left;padding-left:2px;overflow:auto;}
   #product_block{background: none repeat scroll 0 0 #E4E4E4;
     height: 170px;
     margin-bottom: 5px;
     width: 100%;}
+  #cart_block{background:lavender;width:250px;height:700px;float:right;}
 </style>
 
 

@@ -1,22 +1,34 @@
-Depot::Application.routes.draw do
-  match "cart/my_cart_page"=>"cart#my_cart_page"
-  match "cart/display_total"=>"cart#display_total"
-  match "buyer/add_to_cart"=>"buyer#add_to_cart"
-  get "buyer/catalog"
-
-  get "misc/new"
-  post "misc/new"
-  get "misc/edit"
-  post "misc/edit"
-  get "misc/show"
-  post "misc/show"
-  resources :orders
-
+Depot::Application.routes.draw do 
+ 
   resources :products
 
   resources :users
-  match"misc/login"=>"misc#login"
-  match"misc/logout"=>"misc#logout"
+
+  match "cart/my_cart_page"=>"cart#my_cart_page"
+  match "cart/display_total"=>"cart#display_total"
+  match "buyer/add_to_cart"=>"buyer#add_to_cart"
+  match "orders/orders_list"=>"orders#orders_list"
+  match "orders/approve_orders"=>"orders#approve_orders"
+  match "orders/approval"=>"orders#approval"
+  get "buyer/catalog"
+
+#  get "misc/new"
+#  post "misc/new"
+#  get "misc/edit"
+#  post "misc/edit"
+#  get "misc/create_files"
+#  post "misc/create_files"
+#  match "misc/show_file"=>"misc#show_file"
+#  match "misc/edit_file"=>"misc#edit_file"
+#  match "misc/delete_file"=>"misc#delete_file"
+#  match "misc/delete_role"=>"misc#delete_role"
+
+
+#  match"misc/login"=>"misc#login"
+#  match"misc/logout"=>"misc#logout"
+
+  resources :misc
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

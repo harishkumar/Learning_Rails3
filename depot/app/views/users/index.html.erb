@@ -1,10 +1,8 @@
 <h1>Listing users</h1>
-
+<%unless params[:mess].nil?%><div id="flash"><%=params[:mess]%></div><%end%>
 <table>
   <tr>
     <th>Name</th>
-    <th>Password</th>
-    <th>Salt</th>
     <th>Role</th>
     <th>Email</th>
     <th></th>
@@ -15,18 +13,18 @@
 <% @users.each do |user| %>
   <tr>
     <td><%= user.name %></td>
-    <td><%= user.password %></td>
-    <td><%= user.salt %></td>
-    <td><%= user.role_id %></td>
+    <td><%= Role.find(user.role_id).name %></td>
     <td><%= user.email %></td>
     <td><%= link_to 'Show', user %></td>
     <td><%= link_to 'Edit', edit_user_path(user) %></td>
-    <td><%= link_to 'Destroy', user, :method => :delete, :data => { :confirm => 'Are you sure?' } %></td>
+    <td><%if user.role_id!=1 and session[:user_id]!=user.id%><%= link_to 'Destroy', user, :method => :delete, :data => { :confirm => 'Are you sure?' } %><%end%></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New User', new_user_path %> <%=link_to "Roles",:controller=>"misc",:action=>"new"%>
-<%=link_to "Products",:controller=>"products",:action=>"index"%>
+<%if User.find(session[:user_id]).role_id==1%>
+<%= link_to 'New User', new_user_path %>
+<%=link_to "Roles",:controller=>"misc",:action=>"new"%>
+<%end%>

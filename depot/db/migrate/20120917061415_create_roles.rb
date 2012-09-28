@@ -5,5 +5,10 @@ class CreateRoles < ActiveRecord::Migration
 
       t.timestamps
     end
+
+    Role.create :name   => 'Admin' 
+    Role.create :name   => 'Seller'
+    Role.create :name   => 'Buyer'
   end
+
 end

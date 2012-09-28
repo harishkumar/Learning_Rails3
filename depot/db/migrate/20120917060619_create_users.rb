@@ -9,5 +9,9 @@ class CreateUsers < ActiveRecord::Migration
 
       t.timestamps
     end
+      User.create :name => 'admin',:password   => 'research',:role_id => 1,
+    :email=> 'admin@eabyas.com'
+
   end
+
 end

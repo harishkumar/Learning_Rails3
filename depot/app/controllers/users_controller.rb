@@ -2,8 +2,12 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
+    if User.find(session[:user_id]).role_id!=1
+    @users=User.find_all_by_id(session[:user_id])
+    else
     @users = User.all
-
+    end
+    
     respond_to do |format|
       format.html # index.html.erb
       format.json { render :json => @users }
@@ -25,7 +29,11 @@ class UsersController < ApplicationController
   # GET /users/new.json
   def new
     @user = User.new
-
+     if User.find(session[:user_id]).role_id!=1
+    @roles = Role.find(:all,:conditions=>'id>1')
+    else
+    @roles = Role.all
+    end
     respond_to do |format|
       format.html # new.html.erb
       format.json { render :json => @user }
@@ -34,6 +42,11 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
+    if User.find(params[:id]).role_id!=1
+    @roles = Role.find(:all,:conditions=>'id>1')
+    else
+    @roles = Role.all
+    end
     @user = User.find(params[:id])
   end
 
@@ -41,8 +54,7 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(params[:user])
-
-    respond_to do |format|
+   respond_to do |format|
       if @user.save
         format.html { redirect_to @user, :notice => 'User was successfully created.' }
         format.json { render :json => @user, :status => :created, :location => @user }

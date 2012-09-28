@@ -21,7 +21,7 @@
   </div>
  <div class="field">
     <%= f.label :role_id %><br />
-    <% roles = Role.all.map{|a| [a.name, a.id] } %>
+    <% roles = @roles.map{|a| [a.name, a.id] } %>
     <%= f.select :role_id, roles%>
   </div>
   <div class="field">

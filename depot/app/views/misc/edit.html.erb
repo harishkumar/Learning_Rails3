@@ -1,2 +1,5 @@
-<h1>Misc#edit</h1>
-<p>Find me in app/views/misc/edit.html.erb</p>
+<%= form_for :role do |r| %>
+Add Role <%=r.text_field :name,:value=>Role.find(params[:id]).name%><%=r.hidden_field :id,:value=>params[:id]%>
+<%=r.submit%>
+<%end%>
+<br/><%unless @mess.blank?%><%=@mess%><%end%><br/>

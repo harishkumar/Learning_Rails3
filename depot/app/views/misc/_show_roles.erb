@@ -2,7 +2,12 @@
 <%unless @roles.blank?%>
 <%@roles.each do |r| %>
 <div><p style="width:20%;float:left;"><%=r.name%></p>
+  <%if r.id!=1 and r.id!=2 and r.id!=3%>
   <p style="width:10%;float:left;"><%=link_to "Edit",:action=>"edit",:id=>r.id%></p>
-  <p style="width:70%;float:left;"><%=link_to "Delete"%></p></div>
+  <p style="width:70%;float:left;"><%=link_to "Delete",:action=>"delete_role",:id=>r.id%></p></div>
+  <%else%>
+  <p style="width:10%;float:left;color:#bfbfbf;">Edit</p>
+  <p style="width:70%;float:left;color:#bfbfbf;">Delete</p>
+  <%end%>
 <%end%>
 <%end%>

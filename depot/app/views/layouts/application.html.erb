@@ -7,12 +7,29 @@
   <%= csrf_meta_tags %>
 </head>
 <body style="border:1px solid #444;">
-  <div style="background:#333;height:40px;">
-    <%if !session[:user_id].nil?%>
-<%=link_to "logout",:controller=>"misc",:action=>"logout"%>
-   <%end%>
+  <div id="header"><p style="color:#fff;">
+   <%if !session[:user_id].nil?%>
+      <%=link_to "logout",:controller=>"misc",:action=>"logout"%>
+      <%if User.find(session[:user_id]).role_id==1%>
+      <%=link_to "Files",:controller=>"misc",:action=>"create_files"%>
+      <%=link_to "Role Settings",:controller=>"misc",:action=>"new"%>
+      <%elsif User.find(session[:user_id]).role_id==2%>
+      <%=link_to "Orders List",:controller=>"orders",:action=>"orders_list"%>
+      <%=link_to "My Products",:controller=>"products",:action=>"index"%>
+      <%elsif User.find(session[:user_id]).role_id==3%>
+      <%=link_to "Catalog",:controller=>"buyer",:action=>"catalog"%>
+      <%=link_to "Cart Page",:controller=>"cart",:action=>"my_cart_page"%>
+      <%end%>
+      <%=link_to "User Settings",:controller=>"users",:action=>"index"%>
+   <%end%></p>
   </div>
-  <div style="min-height:300px;"><%= yield %></div>
-  <div style="background:#333;height:10px;"></div>
+  <div id="yield_block"><%= yield %></div>
+  
 </body>
 </html>
+
+<style>
+  #header{background:#333;height:40px;}
+  #header p a{color:#fff;float:right;padding-right:10px;}
+  #yield_block{min-height:300px;}
+</style>

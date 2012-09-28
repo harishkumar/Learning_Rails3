@@ -1,0 +1,6 @@
+<%@file=Files.find(params[:id])%>
+<%@content = IO.readlines(@file.path)%>
+<%= form_for(:my_file, :url => {:action=> 'edit_file'}, :html=> {:multipart=>true}) do |f|%>
+content <%=f.text_area :content,:value=>@content%><br/><%=f.hidden_field :path,:value=>@file.path%>
+<%=f.submit "Edit File"%>
+<%end%>

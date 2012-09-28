@@ -23,12 +23,7 @@
     <%= f.label :price %><br />
     <%= f.text_field :price %>
   </div>
-  <div class="field">
-    <%= f.label :user_id %><br />
-     <% users = User.all.map{|a| [a.name, a.id] } %>
-    <%= f.select :user_id, users%>
-    
-  </div>
+    <%= f.hidden_field :user_id,:value=>session[:user_id]%>
   <div class="actions">
     <%= f.submit %>
   </div>

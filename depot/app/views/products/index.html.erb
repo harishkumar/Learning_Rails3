@@ -1,5 +1,5 @@
-<h1>MENU</h1>
-
+<h1>PRODUCTS MENU</h1>
+<%unless params[:mess].nil?%><div id="flash"><%=params[:mess]%></div><%end%>
 <table cellpadding="10" border="2px" cellspacing="1">
   <tr><th></th>
     <th>Name</th>
@@ -17,7 +17,7 @@
     <td><%= product.name %></td>
     <td><%= product.description %></td>
     <td><%= product.price %></td>
-    <td><%= User.find(product.user).name %></td>
+    <td><%= User.find(product.user_id).name %></td>
     <td><%= link_to 'Show', product %></td>
     <td><%= link_to 'Edit', edit_product_path(product) %></td>
     <td><%= link_to 'Destroy', product, :method => :delete, :data => { :confirm => 'Are you sure?' } %></td>
@@ -27,4 +27,5 @@
 
 <br />
 
-<%= link_to 'New Product', new_product_path %> <%= link_to 'Show Orders',:controller=>'orders',:action=>"index" %>
+<%= link_to 'New Product', new_product_path %>
+<%= link_to 'Show Orders',:controller=>'orders',:action=>"orders_list" %>

@@ -1,0 +1,29 @@
+<%count=0%>
+<%=form_for(:order,:remote=>true,:url=>{:controller=>"orders",:action=>"approval"}) do |c|%>
+<table cellpadding="2px" cellspacing="2px;" border="0">
+  <tr><td>Ordernumber</td><td>Customer</td><td>Quantity</td><td>Date</td><td>Time</td><td>Payment</td><td>Approval</td></tr>
+<%@orders.each do |order|%>
+  <tr><td><%=order.order_number%></td><td><%=User.find(order.buyer_id).name%></td>
+<td><%=order.quantity%></td><td><%=order.shopping_date.strftime('%d-%m-%y')%></td>
+<td><%=order.shopping_time.strftime('%H:%M')%></td><td><%=order.payment_amount%></td>
+<td><%if order.approval==true%>
+  Done
+<%else%>
+<%=c.check_box "approval#{order.id}"%><%count=count+1%>
+  <%end%>
+</td>
+   <%=c.hidden_field :order_number,:value=>order.order_number%>
+  </tr>
+<%end%>
+</table>
+<%if count!=0%>
+<%=c.submit "Approve",:id=>"my"%>
+<%end%>
+<%end%>
+
+<div id="flash"><p id="img" style="display:none;"><%= image_tag 'loader2.gif' %></p> </div>
+<script type="text/javascript">
+$("#my").click(function(){
+  $("#img").css("display","block");
+});
+</script>

@@ -1,83 +1,35 @@
 class OrdersController < ApplicationController
-  # GET /orders
-  # GET /orders.json
-  def index
-    @orders = Order.all
 
+  def orders_list
+    @orders=Order.find_all_by_seller_id(session[:user_id])
+       @uniq_orders=Order.group(:order_number)
+   
+  end
+
+  def approve_orders
+    @orders=Order.find_all_by_order_number(params[:order_number])
     respond_to do |format|
-      format.html # index.html.erb
-      format.json { render :json => @orders }
+      format.js
     end
   end
 
-  # GET /orders/1
-  # GET /orders/1.json
-  def show
-    @order = Order.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render :json => @order }
-    end
-  end
-
-  # GET /orders/new
-  # GET /orders/new.json
-  def new
-    @order = Order.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render :json => @order }
-    end
-  end
-
-  # GET /orders/1/edit
-  def edit
-    @order = Order.find(params[:id])
-  end
-
-  # POST /orders
-  # POST /orders.json
-  def create
-    @order = Order.new(params[:order])
-
-    respond_to do |format|
-      if @order.save
-        format.html { redirect_to @order, :notice => 'Order was successfully created.' }
-        format.json { render :json => @order, :status => :created, :location => @order }
-      else
-        format.html { render :action => "new" }
-        format.json { render :json => @order.errors, :status => :unprocessable_entity }
+  def approval
+    @orders=Order.find_all_by_order_number(params['order'][:order_number])
+    count=0
+    amount=0
+    @orders.each do |order|
+      if params['order']["approval#{order.id}"]=='1'
+       amount=amount+order.payment_amount
+       count=count+1
+       order.update_attribute(:approval,true)
       end
     end
+     email=User.find(@orders.first.buyer_id).email
+     mess="Thank You for shopping..!\n Your Total bill amount is #{amount} with Reciept no: #{@orders.first.reciept_no}\n\n\n Regards\nHarish"
+     DepotMailer.registration_confirmation(mess,email).deliver
+     notice="Payment Done sucesfully for #{count} Products"
+   
+    render :js=> "$('#order_products').html('#{notice}');"
   end
 
-  # PUT /orders/1
-  # PUT /orders/1.json
-  def update
-    @order = Order.find(params[:id])
-
-    respond_to do |format|
-      if @order.update_attributes(params[:order])
-        format.html { redirect_to @order, :notice => 'Order was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render :action => "edit" }
-        format.json { render :json => @order.errors, :status => :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /orders/1
-  # DELETE /orders/1.json
-  def destroy
-    @order = Order.find(params[:id])
-    @order.destroy
-
-    respond_to do |format|
-      format.html { redirect_to orders_url }
-      format.json { head :no_content }
-    end
-  end
 end
