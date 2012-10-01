@@ -1,38 +1,15 @@
-Depot::Application.routes.draw do 
- 
-  resources :products
+OceanLayout::Application.routes.draw do
 
-  resources :users
-
-  match "cart/my_cart_page"=>"cart#my_cart_page"
-  match "cart/display_total"=>"cart#display_total"
-  match "buyer/add_to_cart"=>"buyer#add_to_cart"
-  match "orders/orders_list"=>"orders#orders_list"
-  match "orders/approve_orders"=>"orders#approve_orders"
-  match "orders/approval"=>"orders#approval"
-  get "buyer/catalog"
-
-  get "misc/new"
-  post "misc/new"
-  get "misc/edit"
-  post "misc/edit"
-  get "misc/create_files"
-  post "misc/create_files"
-  match "misc/show_file"=>"misc#show_file"
-  match "misc/edit_file"=>"misc#edit_file"
-  match "misc/delete_file"=>"misc#delete_file"
-  match "misc/delete_role"=>"misc#delete_role"
-
-
-  match"misc/login"=>"misc#login"
-  match"misc/logout"=>"misc#logout"
-
-  resources :misc
+  get "demo/index"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
   # Sample of regular route:
+
+
+ match 'email/send_email'=>'email#send_email' 
+
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action
 
@@ -78,7 +55,7 @@ Depot::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-   root :to => 'misc#login'
+  # root :to => 'welcome#index'
 
   # See how all your routes lay out with "rake routes"
 

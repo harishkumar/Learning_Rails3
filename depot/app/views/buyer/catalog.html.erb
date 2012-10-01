@@ -1,5 +1,7 @@
 <div id="page">
-  <div id="left_menu"><%unless params[:mess].nil?%><div id="flash"><%=params[:mess]%></div><%end%></div>
+  <div id="left_menu"><%unless params[:mess].nil?%><div id="flash"><%=params[:mess]%></div><%end%>
+ 
+  </div>
   <div id="content">
     <%@products.each do |p|%>
      <div id="product_block"><div id="photo"></div>

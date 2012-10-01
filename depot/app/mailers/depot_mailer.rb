@@ -3,7 +3,9 @@ class DepotMailer < ActionMailer::Base
 
   def registration_confirmation(mess,email)
     @mess=mess
+    attachments["rails.png"] = File.read("#{Rails.root}/app/assets/images/rails.png")
    mail(:to => email,:subject => "Payment")
+   
   end
 
   def user_creation(user_id)

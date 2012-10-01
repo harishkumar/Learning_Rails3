@@ -1,6 +1,9 @@
 class BuyerController < ApplicationController
+  require 'net/http'
+  require 'addmegem'
   def catalog
     @products=Product.all
+    #@ans=Addmegem.kalupu(10,20)
   end
 
   def add_to_cart
